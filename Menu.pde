@@ -5,7 +5,7 @@ class MainMenu extends GameState {
   
   void stateStart() {
     startButton = new Button(width*1/3, height*1/3, width*1/3, height*1/3, "Play", new ChangeScene(new CountDown()));
-    text = new TextBox("Tic", 0, 0, width*7/12, height);
+    text = new TextBox("TicTacToe", width*1/5, 0, width*2/3, height*1/3);
     text.calculateFontSize();
   }
   
@@ -14,6 +14,7 @@ class MainMenu extends GameState {
     rect(0,0,width,height);
     startButton.paint();
     startButton.mouseInBox();
+    text.drawText();
   }
   
 }

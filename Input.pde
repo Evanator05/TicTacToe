@@ -3,7 +3,6 @@ class Input {
   boolean previous = false;
   
   void checkMousePressed() {
-    
     if (mousePressed) {
       if (!previous) {
         mouseClicked = true;

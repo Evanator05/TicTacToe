@@ -1,7 +1,7 @@
 class Play extends GameState {
   ArrayList<GridSpace> buttons = new ArrayList<GridSpace>();
   int xWidth = 3, yHeight = 3;
-  int turn = 1;
+  int turn = 0;
   int player = 1;
   int score[] = {0,0};
   TextBox scoreBoard;
@@ -24,7 +24,7 @@ class Play extends GameState {
     return ceil(turn%2+1);
   }
   
-  void reMakeBoard() {
+  void resetScene() {
     buttons.clear();
     float tileSize = ((width/xWidth) * int((width<height))) + ((height/yHeight) * int((width>height)));//set tileSize
   
@@ -35,7 +35,7 @@ class Play extends GameState {
       }
     };
   };
-  
+
   GridSpace getSpace(int x, int y) {
     return buttons.get((x-1) + (3*(y-1)));
   }
@@ -52,7 +52,7 @@ class Play extends GameState {
       for (int i = 0; i < 2; i++) {
         if (numberOfWork[i] >=3) {
           score[i] += 1;
-          reMakeBoard();
+          resetScene();
         }
       }//Add score to each player
       
@@ -60,25 +60,51 @@ class Play extends GameState {
 
     for (int y = 0; y < 3; y++) {
       int numberOfWork[] ={0,0};
-      
       for (int x = 0; x < 3; x++) {
-        
         int playerState = getSpace(x+1,y+1).type;
-        
         if (playerState != 0) {
           numberOfWork[playerState-1] += 1;
         }//End player state
-      
       }
 
       for (int i = 0; i < 2; i++) {
         if (numberOfWork[i] >=3) {
           score[i] += 1;
-          reMakeBoard();
+          resetScene();
         }
       }//Add score to each player
-      
     }//End of row check
+    
+    int numberOfWork[] ={0,0};
+    for (int i = 0; i < 9; i+=4) {
+      int playerState = buttons.get(i).type;
+      if (playerState != 0) {
+          numberOfWork[playerState-1] += 1;
+      }//End player state
+      
+    }
+    for (int i = 0; i < 2; i++) {
+        if (numberOfWork[i] >=3) {
+          score[i] += 1;
+          resetScene();
+        }
+      }//Add score to each player
+  
+    numberOfWork[0] = 0;
+    numberOfWork[1] = 0;
+    for (int i = 2; i < 8; i+=2) {
+      int playerState = buttons.get(i).type;
+      if (playerState != 0) {
+          numberOfWork[playerState-1] += 1;
+      }//End player state
+      
+    }
+    for (int i = 0; i < 2; i++) {
+        if (numberOfWork[i] >=3) {
+          score[i] += 1;
+          resetScene();
+        }
+      }//Add score to each player
     
   }//End of checkWin
   

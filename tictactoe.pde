@@ -1,5 +1,6 @@
 GameState scene;
 Input input;
+
 void setup() {
   size(1280,720);
   changeScene(new MainMenu());
